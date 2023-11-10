@@ -138,7 +138,7 @@ void applyPatch()
         goto end;
     }
 
-    //TODO:将补丁拷贝至开发环境
+    /* 将补丁拷贝至开发环境 */
     sprintf(command, "xcopy Patch\\deltaos6.2 %s /S /E /Y", dirPathBackup);
     system(command);
 
