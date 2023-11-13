@@ -14,10 +14,11 @@ extern void applyPatch();
 extern void baseDBInfoShow();
 extern void patchDBInfoShow();
 
-int main(int argc, char *argv[])
+int main()
 {
     char funcString[32] = {};
-    int function = 0;
+    int function;
+    char *endPtr;
     char encodedString[64] = {};
     char password[32] = {};
 
@@ -57,46 +58,49 @@ label:
         return 0;
     }
 
-    function = atoi(funcString);
 
-    switch (function)
+    function = (int) strtol(funcString, &endPtr, 10);
+
+    if (*endPtr == '\0')
     {
-        case 1:
-            applyPatch();
-            break;
-        case 2:
-            patchDBInfoShow();
-            break;
-        case 3:
-            baseDBInfoShow();
-            break;
-        case 4:
-            makePatchDatabase(PATCH_DATABASE_FILE_NAME);
-            break;
-        case 5:
-            printf("请输入密码:\n");
-            fgets(password, sizeof(password), stdin);
-            password[strcspn(password, "\n")] = '\0';
+        switch (function)
+        {
+            case 1:
+                applyPatch();
+                break;
+            case 2:
+                patchDBInfoShow();
+                break;
+            case 3:
+                baseDBInfoShow();
+                break;
+            case 4:
+                makePatchDatabase(PATCH_DATABASE_FILE_NAME);
+                break;
+            case 5:
+                printf("请输入密码:\n");
+                fgets(password, sizeof(password), stdin);
+                password[strcspn(password, "\n")] = '\0';
 
-            base64Encode((const unsigned char *)password, strlen(password), encodedString);
+                base64Encode((const unsigned char *) password, (int) strlen(password), encodedString);
 
-            if (strcmp(INTERNEL_PASSWORD, encodedString) == 0)
-            {
-                makeBaseDatabase(BASE_DATABASE_FILE_NAME);
-            }
-            else
-            {
-                printf("密码错误!\n");
-            }
-            break;
+                if (strcmp(INTERNEL_PASSWORD, encodedString) == 0)
+                {
+                    makeBaseDatabase(BASE_DATABASE_FILE_NAME);
+                }
+                else
+                {
+                    printf("密码错误!\n");
+                }
+                break;
 
-        default:
-            printf("\n我的发?你选择的功能不存在!\n");
+            default:
+                break;
+        }
     }
 
+    printf("\n我的发?你选择的功能不存在!\n");
     printf("\n");
 
     goto label;
-
-    return 0;
 }
