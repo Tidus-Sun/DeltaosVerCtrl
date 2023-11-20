@@ -42,6 +42,8 @@ void applyPatch()
     int index;
     char initialPath[256] = {};
 
+    getcwd(initialPath, sizeof(initialPath));
+
     ret = patchIntegrityCheck();
     if (ret != 0)
     {
@@ -94,7 +96,6 @@ void applyPatch()
 
         return;
     }
-
 
     /*解压缩开发环境中的基础数据库*/
     sprintf(command, "data\\u.dat -o -q -d %s %s", dirPath, compressedDBFilePath);
@@ -190,8 +191,6 @@ void applyPatch()
 
     remove(compressedDBFilePath);
 
-    getcwd(initialPath, sizeof(initialPath));
-
     chdir(dirPath);
     sprintf(command, "%s\\data\\z.dat -r -q %s %s", initialPath, COMPRESSED_BASE_DATABASE_FILE_NAME, BASE_DATABASE_FILE_NAME);
     system(command);
@@ -211,5 +210,4 @@ void applyPatch()
 end:
     cJSON_Delete(parsedBaseDB);
     cJSON_Delete(parsedPatchDB);
-
 }
