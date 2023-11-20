@@ -37,7 +37,7 @@ void createPatchFile(char *filename, char *vendor, char *product, char *architec
 
     // 将JSON对象打印为字符串
     jsonString = cJSON_Print(root);
-    printf("Generated Files Database: %s\n", jsonString);
+    //printf("Generated Files Database: %s\n", jsonString);
 
     // 将JSON对象写入文件
     file = fopen(filename, "w");
@@ -92,7 +92,14 @@ void makePatchDatabase(char *filename)
     if (ret != 0)
     {
         printf("访问Result目录出错，退出补丁制作!\n");
+        chdir(initialPath);
         return;
+    }
+
+    /* 删除已存在的patch.zip补丁文件 */
+    if (access(COMPRESSED_PATCH_FILE_NAME, F_OK) == 0)
+    {
+        remove(COMPRESSED_PATCH_FILE_NAME);
     }
 
     createPatchFile(filename, vendor, product, architecture, date, producer);

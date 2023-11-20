@@ -43,7 +43,7 @@ void createDBFile(char *filename, char *vendor, char *product, char *architectur
 
     // 将JSON对象打印为字符串
     jsonString = cJSON_Print(root);
-    printf("Generated Files Database: %s\n", jsonString);
+    //printf("Generated Files Database: %s\n", jsonString);
 
     // 将JSON对象写入文件
     file = fopen(filename, "w");
@@ -106,6 +106,7 @@ void makeBaseDatabase(char *filename)
     {
         printf("开发环境目录错误，请确认后再进行制作!\n");
         remove(filename);
+        chdir(initialPath);
         return;
     }
 

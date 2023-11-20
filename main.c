@@ -95,11 +95,15 @@ label:
                 break;
 
             default:
+                printf("\n我的发?你选择的功能不存在!\n");
                 break;
         }
     }
+    else
+    {
+        printf("\n我的发?你选择的功能不存在!\n");
+    }
 
-    printf("\n我的发?你选择的功能不存在!\n");
     printf("\n");
 
     goto label;
