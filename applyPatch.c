@@ -108,7 +108,6 @@ void applyPatch()
     sprintf(baseDBFilePath, "%s/%s", dirPath, BASE_DATABASE_FILE_NAME);
     parsedBaseDB = openDBFile(baseDBFilePath);
 
-
     baseDBItem = cJSON_GetObjectItem(parsedBaseDB, "vendor");
     patchDBItem = cJSON_GetObjectItem(parsedPatchDB, "vendor");
 
