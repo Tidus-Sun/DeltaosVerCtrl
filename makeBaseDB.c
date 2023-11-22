@@ -74,6 +74,29 @@ void makeBaseDatabase(char *filename)
 
     getcwd(initialPath, sizeof(initialPath));
 
+    printf("请输入开发环境路径: ");
+    fgets(dirPath, sizeof(dirPath), stdin);
+    replaceBackslash(dirPath);
+
+    strcat(dirPath, "/deltaos6.2");
+    if (checkDirValid(dirPath) != 0)
+    {
+        printf("开发环境目录错误，请确认后再进行制作!\n");
+        remove(filename);
+        chdir(initialPath);
+        return;
+    }
+
+    chdir(dirPath);
+    if (access(COMPRESSED_BASE_DATABASE_FILE_NAME, F_OK) == 0 || access(BASE_DATABASE_FILE_NAME, F_OK) == 0)
+    {
+        printf("在开发环境中发现基础数据库, 请删除后再进行制作!\n");
+        chdir(initialPath);
+
+        return;
+    }
+    chdir(initialPath);
+
     printf("请输入厂商信息: ");
     fgets(vendor, sizeof(vendor), stdin);
     vendor[strcspn(vendor, "\n")] = '\0';
@@ -96,19 +119,6 @@ void makeBaseDatabase(char *filename)
     }
 
     createDBFile(filename, vendor, product, architecture, date);
-
-    printf("请输入开发环境路径: ");
-    fgets(dirPath, sizeof(dirPath), stdin);
-    replaceBackslash(dirPath);
-
-    strcat(dirPath, "/deltaos6.2");
-    if (checkDirValid(dirPath) != 0)
-    {
-        printf("开发环境目录错误，请确认后再进行制作!\n");
-        remove(filename);
-        chdir(initialPath);
-        return;
-    }
 
     /* 计算用于记录文件路径的起始索引号 */
     dirBaseIndex = getBaseIndex(dirPath) + 1;

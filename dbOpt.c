@@ -144,6 +144,34 @@ int getFileRecordIndex(cJSON *parsedDB, char *fileName)
     return -1;
 }
 
+/* 返回基础数据中指定文件的MD5 */
+char *getFileRecordMd5(cJSON *parsedDB, char *fileName)
+{
+    cJSON *filesRecording;
+    cJSON *arrayItem;
+    cJSON *item;
+    int arraySize;
+    int i;
+
+    filesRecording = getDBFilesRecording(parsedDB);
+    arraySize = cJSON_GetArraySize(filesRecording);
+
+    for (i = 0; i < arraySize; i++)
+    {
+        arrayItem = cJSON_GetArrayItem(filesRecording, i);
+        item = cJSON_GetObjectItem(arrayItem, "file_name");
+
+        if (strcmp(fileName, item->valuestring) == 0)
+        {
+            item = cJSON_GetObjectItem(arrayItem, "md5");
+
+            return item->valuestring;
+        }
+    }
+
+    return NULL;
+}
+
 void updateFileRecordMd5(cJSON *parsedDB, int index, char *newMd5)
 {
     cJSON *filesRecording;

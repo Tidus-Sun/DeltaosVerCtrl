@@ -8,5 +8,8 @@
 #define COMPRESSED_BASE_DATABASE_FILE_NAME "baseDB.cd"
 #define COMPRESSED_PATCH_DATABASE_FILE_NAME "patchDB.cd"
 #define COMPRESSED_PATCH_FILE_NAME "patch.zip"
+#define CHECKSUM_FILE_NAME "checksum.txt"
+
+#define STRING_SIZE (0x1000)
 
 #endif //PATCHTOOL_CONFIG_H

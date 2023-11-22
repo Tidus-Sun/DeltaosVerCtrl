@@ -4,7 +4,7 @@
 #include <windows.h>
 #include "config.h"
 
-#define VERSION "v0.9"
+#define VERSION "v1.0"
 
 extern int toolIntegrityCheck();
 extern void base64Encode(const unsigned char *input, int length, char *output);
@@ -13,6 +13,7 @@ extern void makePatchDatabase(char *filename);
 extern void applyPatch();
 extern void baseDBInfoShow();
 extern void patchDBInfoShow();
+extern void fileChecksum();
 
 void CenterConsoleWindow()
 {
@@ -96,7 +97,7 @@ int main()
 
 label:
     printf("请选择需要的功能: \n\n");
-    printf("1.打补丁\n2.查看补丁数据库信息\n3.查看基础数据库信息\n4.制作补丁\n5.创建基础数据库\nQ.退出程序\n\n");
+    printf("1.打补丁\n2.查看补丁数据库信息\n3.查看基础数据库信息\n4.校验文件\n5.制作补丁\n6.创建基础数据库\nQ.退出程序\n\n");
     fgets(funcString, sizeof(funcString), stdin);
     funcString[strcspn(funcString, "\n")] = '\0';
 
@@ -125,9 +126,12 @@ label:
                 baseDBInfoShow();
                 break;
             case 4:
-                makePatchDatabase(PATCH_DATABASE_FILE_NAME);
+                fileChecksum();
                 break;
             case 5:
+                makePatchDatabase(PATCH_DATABASE_FILE_NAME);
+                break;
+            case 6:
                 printf("请输入密码:\n");
                 fgets(password, sizeof(password), stdin);
                 password[strcspn(password, "\n")] = '\0';
@@ -143,7 +147,6 @@ label:
                     printf("密码错误!\n");
                 }
                 break;
-
             default:
                 printf("\n我的发?你选择的功能不存在!\n");
                 break;
