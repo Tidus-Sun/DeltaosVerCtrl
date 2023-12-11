@@ -54,9 +54,9 @@ void createPatchFile(char *filename, char *vendor, char *product, char *architec
 
 void makePatchDatabase(char *filename)
 {
-    char vendor[16] = {};
-    char product[16] = {};
-    char architecture[16] = {};
+    char vendor[64] = {};
+    char product[64] = {};
+    char architecture[64] = {};
     char date[9] = {};
     char producer[32] = {};
     char dirPath[256] = {};

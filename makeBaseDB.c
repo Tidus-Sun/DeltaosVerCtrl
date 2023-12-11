@@ -60,9 +60,9 @@ void createDBFile(char *filename, char *vendor, char *product, char *architectur
 
 void makeBaseDatabase(char *filename)
 {
-    char vendor[16] = {};
-    char product[16] = {};
-    char architecture[16] = {};
+    char vendor[64] = {};
+    char product[64] = {};
+    char architecture[64] = {};
     char date[9] = {};
     char dirPath[256] = {};
     cJSON *parsedDB;
