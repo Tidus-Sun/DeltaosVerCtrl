@@ -17,4 +17,4 @@ add_executable(${PROJECT_NAME} main.c
         checkIntegrity.c
         fileChecksum.c)
 link_directories(${PROJECT_NAME} "D:/msys64/clang64/lib")
-target_link_libraries(${PROJECT_NAME} libws2_32.a libssl.a libcrypto.a libcjson.a)
+target_link_libraries(${PROJECT_NAME} libws2_32.a libssl.a libcrypto.a libcjson.a libcrypt32.a)
