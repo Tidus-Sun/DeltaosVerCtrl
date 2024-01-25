@@ -4,7 +4,7 @@
 #include <windows.h>
 #include "config.h"
 
-#define VERSION "v1.0"
+#define VERSION "v1.1"
 
 extern int toolIntegrityCheck();
 extern void base64Encode(const unsigned char *input, int length, char *output);

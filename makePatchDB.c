@@ -70,21 +70,37 @@ void makePatchDatabase(char *filename)
 
     getcwd(initialPath, sizeof(initialPath));
 
-    printf("请输入厂商信息: ");
-    fgets(vendor, sizeof(vendor), stdin);
-    vendor[strcspn(vendor, "\n")] = '\0';
+    do
+    {
+        printf("请输入厂商信息: ");
+        fgets(vendor, sizeof(vendor), stdin);
+        vendor[strcspn(vendor, "\n")] = '\0';
+    }
+    while (strlen(vendor) == 0);
 
-    printf("请输入产品信息: ");
-    fgets(product, sizeof(product), stdin);
-    product[strcspn(product, "\n")] = '\0';
+    do
+    {
+        printf("请输入产品信息: ");
+        fgets(product, sizeof(product), stdin);
+        product[strcspn(product, "\n")] = '\0';
+    }
+    while (strlen(product) == 0);
 
-    printf("请输入架构信息: ");
-    fgets(architecture, sizeof(architecture), stdin);
-    architecture[strcspn(architecture, "\n")] = '\0';
+    do
+    {
+        printf("请输入架构信息: ");
+        fgets(architecture, sizeof(architecture), stdin);
+        architecture[strcspn(architecture, "\n")] = '\0';
+    }
+    while (strlen(architecture) == 0);
 
-    printf("请输入补丁制作人姓名(英文): ");
-    fgets(producer, sizeof(producer), stdin);
-    producer[strcspn(producer, "\n")] = '\0';
+    do
+    {
+        printf("请输入补丁制作人姓名(英文): ");
+        fgets(producer, sizeof(producer), stdin);
+        producer[strcspn(producer, "\n")] = '\0';
+    }
+    while (strlen(producer) == 0);
 
     getCurrentDateAsString(date);
 
@@ -113,6 +129,8 @@ void makePatchDatabase(char *filename)
     {
         printf("补丁目录错误，请确认后再进行制作!\n");
         remove(filename);
+        chdir(initialPath);
+
         return;
     }
 

@@ -39,57 +39,150 @@ void baseDBInfoShow()
 
     printf("\n");
 
-    printf("┌────────────────────┬───────────────────────────┐\n");
+    printf("┌────────────────────┬─────────────────────────────────┐\n");
     item = cJSON_GetObjectItem(parsedDB, "vendor");
-    printf("│ 厂商               │ %-26s│\n", item->valuestring);
+    printf("│ 厂商               │ ");
+    if (item != NULL)
+    {
+        printf("%-32s│\n", item->valuestring);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
 
-    printf("├────────────────────┼───────────────────────────┤\n");
+    printf("├────────────────────┼─────────────────────────────────┤\n");
 
     item = cJSON_GetObjectItem(parsedDB, "product");
-    printf("│ 产品               │ %-26s│\n", item->valuestring);
+    printf("│ 产品               │ ");
+    if (item != NULL)
+    {
+        printf("%-32s│\n", item->valuestring);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
 
-    printf("├────────────────────┼───────────────────────────┤\n");
+    printf("├────────────────────┼─────────────────────────────────┤\n");
 
     item = cJSON_GetObjectItem(parsedDB, "architecture");
-    printf("│ 架构               │ %-26s│\n", item->valuestring);
+    printf("│ 架构               │ ");
+    if (item != NULL)
+    {
+        printf("%-32s│\n", item->valuestring);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
 
-    printf("├────────────────────┼───────────────────────────┤\n");
+    printf("├────────────────────┼─────────────────────────────────┤\n");
 
     item = cJSON_GetObjectItem(parsedDB, "type");
-    printf("│ 类型               │ %-26s│\n", item->valuestring);
+    printf("│ 类型               │ ");
+    if (item != NULL)
+    {
+        printf("%-32s│\n", item->valuestring);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
 
-    printf("├────────────────────┼───────────────────────────┤\n");
+    printf("├────────────────────┼─────────────────────────────────┤\n");
 
     item = cJSON_GetObjectItem(parsedDB, "create_date");
-    printf("│ 基础数据库创建日期 │ %-26s│\n", item->valuestring);
+    printf("│ 基础数据库创建日期 │ ");
+    if (item != NULL)
+    {
+        printf("%-32s│\n", item->valuestring);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
 
-    printf("├────────────────────┼───────────────────────────┤\n");
+    printf("├────────────────────┼─────────────────────────────────┤\n");
+
+    item = cJSON_GetObjectItem(parsedDB, "producer");
+    printf("│ 基础数据库制作人   │ ");
+    if (item != NULL)
+    {
+        printf("%-32s│\n", item->valuestring);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
+
+    printf("├────────────────────┼─────────────────────────────────┤\n");
 
     item = cJSON_GetObjectItem(parsedDB, "patch_date");
-    printf("│ 补丁日期           │ %-26s│\n", item->valuestring);
+    printf("│ 补丁日期           │ ");
+    if (item != NULL)
+    {
+        printf("%-32s│\n", item->valuestring);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
 
-    printf("├────────────────────┼───────────────────────────┤\n");
+    printf("├────────────────────┼─────────────────────────────────┤\n");
 
     item = cJSON_GetObjectItem(parsedDB, "number_of_updates");
-    printf("│ 打补丁次数         │ %-26d│\n", item->valueint);
+    printf("│ 打补丁次数         │ ");
+    if (item != NULL)
+    {
+        printf("%-32d│\n", item->valueint);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
 
-    printf("├────────────────────┼───────────────────────────┤\n");
+    printf("├────────────────────┼─────────────────────────────────┤\n");
 
     item = cJSON_GetObjectItem(parsedDB, "last_update_date");
-    printf("│ 最近打补丁日期     │ %-26s│\n", item->valuestring);
+    printf("│ 最近打补丁日期     │ ");
+    if (item != NULL)
+    {
+        printf("%-32s│\n", item->valuestring);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
 
-    printf("├────────────────────┼───────────────────────────┤\n");
+    printf("├────────────────────┼─────────────────────────────────┤\n");
 
     item = cJSON_GetObjectItem(parsedDB, "patch_producer");
-    printf("│ 补丁制作人         │ %-26s│\n", item->valuestring);
+    printf("│ 补丁制作人         │ ");
+    if (item != NULL)
+    {
+        printf("%-32s│\n", item->valuestring);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
 
-    printf("├────────────────────┼───────────────────────────┤\n");
+    printf("├────────────────────┼─────────────────────────────────┤\n");
 
     item = cJSON_GetObjectItem(parsedDB, "files_recording");
-    arraySize = cJSON_GetArraySize(item);
-    printf("│ 记录文件数量       │ %-26d│\n", arraySize);
+    printf("│ 记录文件数量       │ ");
+    if (item != NULL)
+    {
+        arraySize = cJSON_GetArraySize(item);
+        printf("%-32d│\n", arraySize);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
 
-    printf("└────────────────────┴───────────────────────────┘\n");
+    printf("└────────────────────┴─────────────────────────────────┘\n");
 
     item = cJSON_GetObjectItem(parsedDB, "patch_log");
     arraySize = cJSON_GetArraySize(item);
@@ -142,42 +235,98 @@ void patchDBInfoShow()
     item = cJSON_GetObjectItem(parsedDB, "patch_md5");
     printf("补丁文件MD5 ---> [%s]\n", item->valuestring);
 
-    printf("┌────────────────────┬───────────────────────────┐\n");
+    printf("┌────────────────────┬─────────────────────────────────┐\n");
     item = cJSON_GetObjectItem(parsedDB, "vendor");
-    printf("│ 厂商               │ %-26s│\n", item->valuestring);
+    printf("│ 厂商               │ ");
+    if (item != NULL)
+    {
+        printf("%-32s│\n", item->valuestring);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
 
-    printf("├────────────────────┼───────────────────────────┤\n");
+    printf("├────────────────────┼─────────────────────────────────┤\n");
 
     item = cJSON_GetObjectItem(parsedDB, "product");
-    printf("│ 产品               │ %-26s│\n", item->valuestring);
+    printf("│ 产品               │ ");
+    if (item != NULL)
+    {
+        printf("%-32s│\n", item->valuestring);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
 
-    printf("├────────────────────┼───────────────────────────┤\n");
+    printf("├────────────────────┼─────────────────────────────────┤\n");
 
     item = cJSON_GetObjectItem(parsedDB, "architecture");
-    printf("│ 架构               │ %-26s│\n", item->valuestring);
+    printf("│ 架构               │ ");
+    if (item != NULL)
+    {
+        printf("%-32s│\n", item->valuestring);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
 
-    printf("├────────────────────┼───────────────────────────┤\n");
+    printf("├────────────────────┼─────────────────────────────────┤\n");
 
     item = cJSON_GetObjectItem(parsedDB, "type");
-    printf("│ 类型               │ %-26s│\n", item->valuestring);
+    printf("│ 类型               │ ");
+    if (item != NULL)
+    {
+        printf("%-32s│\n", item->valuestring);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
 
-    printf("├────────────────────┼───────────────────────────┤\n");
+    printf("├────────────────────┼─────────────────────────────────┤\n");
 
     item = cJSON_GetObjectItem(parsedDB, "create_date");
-    printf("│ 补丁数据库创建日期 │ %-26s│\n", item->valuestring);
+    printf("│ 补丁数据库创建日期 │ ");
+    if (item != NULL)
+    {
+        printf("%-32s│\n", item->valuestring);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
 
-    printf("├────────────────────┼───────────────────────────┤\n");
+    printf("├────────────────────┼─────────────────────────────────┤\n");
 
     item = cJSON_GetObjectItem(parsedDB, "producer");
-    printf("│ 补丁制作人         │ %-26s│\n", item->valuestring);
+    printf("│ 补丁制作人         │ ");
+    if (item != NULL)
+    {
+        printf("%-32s│\n", item->valuestring);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
 
-    printf("├────────────────────┼───────────────────────────┤\n");
+    printf("├────────────────────┼─────────────────────────────────┤\n");
 
     item = cJSON_GetObjectItem(parsedDB, "files_recording");
-    arraySize = cJSON_GetArraySize(item);
-    printf("│ 记录文件数量       │ %-26d│\n", arraySize);
+    printf("│ 记录文件数量       │ ");
+    if (item != NULL)
+    {
+        arraySize = cJSON_GetArraySize(item);
+        printf("%-32d│\n", arraySize);
+    }
+    else
+    {
+        printf("%-32c│\n", ' ');
+    }
 
-    printf("└────────────────────┴───────────────────────────┘\n");
+    printf("└────────────────────┴─────────────────────────────────┘\n");
 
     cJSON_Delete(parsedDB);
 

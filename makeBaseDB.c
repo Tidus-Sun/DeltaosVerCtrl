@@ -13,7 +13,7 @@ extern void recordMd5(cJSON *dbFilesRecording, char *dirPath, int pathStartIndex
 extern void replaceBackslash(char *str);
 extern cJSON *openDBFile(char *dbFile);
 
-void createDBFile(char *filename, char *vendor, char *product, char *architecture, char *date)
+void createDBFile(char *filename, char *vendor, char *product, char *architecture, char *date, char *producer)
 {
     cJSON *patchRecord;
     cJSON *filesRecording;
@@ -29,6 +29,7 @@ void createDBFile(char *filename, char *vendor, char *product, char *architectur
     cJSON_AddItemToObject(root, "architecture", cJSON_CreateString(architecture));
     cJSON_AddItemToObject(root, "type", cJSON_CreateString("Base DB"));
     cJSON_AddItemToObject(root, "create_date", cJSON_CreateString(date));
+    cJSON_AddItemToObject(root, "producer", cJSON_CreateString(producer));
     cJSON_AddItemToObject(root, "patch_date", cJSON_CreateString(""));
     cJSON_AddItemToObject(root, "number_of_updates", cJSON_CreateNumber(0));
     cJSON_AddItemToObject(root, "last_update_date", cJSON_CreateString(""));
@@ -63,6 +64,7 @@ void makeBaseDatabase(char *filename)
     char vendor[64] = {};
     char product[64] = {};
     char architecture[64] = {};
+    char producer[64] = {};
     char date[9] = {};
     char dirPath[256] = {};
     cJSON *parsedDB;
@@ -97,17 +99,37 @@ void makeBaseDatabase(char *filename)
     }
     chdir(initialPath);
 
-    printf("请输入厂商信息: ");
-    fgets(vendor, sizeof(vendor), stdin);
-    vendor[strcspn(vendor, "\n")] = '\0';
+    do
+    {
+        printf("请输入厂商信息: ");
+        fgets(vendor, sizeof(vendor), stdin);
+        vendor[strcspn(vendor, "\n")] = '\0';
+    }
+    while (strlen(vendor) == 0);
 
-    printf("请输入产品信息: ");
-    fgets(product, sizeof(product), stdin);
-    product[strcspn(product, "\n")] = '\0';
+    do
+    {
+        printf("请输入产品信息: ");
+        fgets(product, sizeof(product), stdin);
+        product[strcspn(product, "\n")] = '\0';
+    }
+    while (strlen(product) == 0);
 
-    printf("请输入架构信息: ");
-    fgets(architecture, sizeof(architecture), stdin);
-    architecture[strcspn(architecture, "\n")] = '\0';
+    do
+    {
+        printf("请输入架构信息: ");
+        fgets(architecture, sizeof(architecture), stdin);
+        architecture[strcspn(architecture, "\n")] = '\0';
+    }
+    while (strlen(architecture) == 0);
+
+    do
+    {
+        printf("请输入基础数据库制作人姓名(英文): ");
+        fgets(producer, sizeof(producer), stdin);
+        producer[strcspn(producer, "\n")] = '\0';
+    }
+    while (strlen(producer) == 0);
 
     getCurrentDateAsString(date);
 
@@ -118,7 +140,7 @@ void makeBaseDatabase(char *filename)
         return;
     }
 
-    createDBFile(filename, vendor, product, architecture, date);
+    createDBFile(filename, vendor, product, architecture, date, producer);
 
     /* 计算用于记录文件路径的起始索引号 */
     dirBaseIndex = getBaseIndex(dirPath) + 1;
